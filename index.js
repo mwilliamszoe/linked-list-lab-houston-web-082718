@@ -1,22 +1,10 @@
 function getName(node){
-  return node.name
-}
-
-function headNode(linkedList, collection){
-  return collection[linkedList]
+  return node.name;
 }
 
 function next(node, collection){
-  let nextAddress = node.nextAddress
-  return collection(`${nextAddress}`)
-}
-
-function nodeAt(index, linkedList, collection){
-  let currentNode = headNode(linkedList, collection);
-  for(let i=0; i<index; i++){
-    currentNode = next(currentNode, collection);
-  }
-  return currentNode
+  let nextAddress = node.next
+  return collection[`${nextAddress}`]
 }
 
 function addressAt(index, linkedList, collection){
@@ -28,20 +16,34 @@ function addressAt(index, linkedList, collection){
   }
 }
 
+function headNode(linkedList, collection){
+  return collection[linkedList]
+}
+
+function nodeAt(index, linkedList, collection){
+  let currentNode = headNode(linkedList, collection);
+  for(let i = 0; i < index; i++){
+     currentNode = next(currentNode, collection);
+  }
+
+  return currentNode;
+}
+
 function indexAt(node, collection, linkedList){
   let currentNode = headNode(linkedList, collection);
   let currentIdx = 0
   while(currentNode != node){
-    current Idx++
+    currentIdx++
     currentNode = next(currentNode, collection)
   }
-  return current Idx
+  return currentIdx
 }
 
+
 function insertNodeAt(index, newNodeAddress, linkedList, collection){
-  let previousNode = nodeAt(index-1, linkedList, collection)
+  let previousNode = nodeAt(index - 1, linkedList, collection)
   let subsequentNode = nodeAt(index, linkedList, collection)
-  
+
   let previousNodeIdx = indexAt(previousNode, collection, linkedList)
   let subsequentNodeIdx = indexAt(subsequentNode, collection, linkedList)
   let previousNodeAddress = addressAt(previousNode, linkedList, collection)
@@ -51,12 +53,13 @@ function insertNodeAt(index, newNodeAddress, linkedList, collection){
   newNode.next = subsequentNodeAddress
 }
 
+
 function deleteNodeAt(index, linkedList, collection){
   let previousNode;
   let currentNode = headNode(linkedList, collection);
-  for(let i=0; i<index; i++){
-    previousNode = currentNode
-    currentNode = next(currentNode, collection)
+  for(let i = 0; i < index; i++){
+     previousNode = currentNode
+     currentNode = next(currentNode, collection);
   }
   previousNode.next = currentNode.next
 }
